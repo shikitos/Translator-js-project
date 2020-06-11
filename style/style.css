@@ -1,25 +1,46 @@
 body {
     background-color: #000;
     color: #fff;
+    outline: none;
 }
 
-.input-from {
-    width: 100%;
-    height: 15rem;
+.header {
+    margin-bottom: 4rem;
+    margin-top: 4rem;
 }
 
-.input-to {
+.typewriter {
+    color: #fff;
+    text-align: center;
+    font-size: 24px;
+    height: 5rem;
+}
+
+#type-of-lang {
+    height: 2rem;
+    width: 20%;
+    justify-content: center;
+}
+
+textarea {
     width: 100%;
     height: 15rem;
+    resize: none;
 }
 
 .translate {
     padding: 15px 45px;
+    margin-top: 4rem;
 }
 
-.exchange {
+.exchange-img {
     color: #fff;
-    height: 4rem;
-    width: 4rem;
+    height: 2rem;
+    width: 2rem;
     align-self: center;
+    transition: 1s;
+}
+
+.exchange-img:hover {
+    transform: rotate(360deg);
 }

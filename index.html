@@ -12,9 +12,11 @@
 </head>
 
 <body>
-    <div class="container">
+    <header class="container header">
         <div class="row ">
-            <div class="col d-flex justify-content-center">
+            <div class="col d-flex align-content-center flex-column">
+                <p class="typewriter" id='typewriter'></p>
+                <br>
                 <select name="typeOfLang" id="type-of-lang">
                     <option value="morse">Morse Code</option>
                     <option value="binary">Binary Code</option>
@@ -23,25 +25,26 @@
                 </select>
             </div>
         </div>
-    </div>
+    </header>
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-md-4">
-                <input type="text" class='input-from'>
+            <div class="col-md-5">
+                <textarea placeholder='Put here your text for translate it to...' class='text-from'></textarea>
             </div>
-            <div class="col-md-2 switch d-flex justify-content-center">
-                <object data="img/exchange.svg" type="image/svg+xml" class='exchange'></object>
+            <div class="col-md-2 switch d-flex justify-content-center exchange">
+                <object data="img/exchange.svg" type="image/svg+xml" class='exchange-img'></object>
             </div>
-            <div class="col-md-4">
-                <input type="text" class='input-to'>
+            <div class="col-md-5">
+                <textarea placeholder='' class='text-to'></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <button type="submit" class="translate"></button>
+                <button type="submit" class="translate">Translate</button>
             </div>
         </div>
     </div>
+    <script src="scripts/index.js"></script>
 </body>
 
 </html>
