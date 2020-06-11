@@ -1,0 +1,25 @@
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+.input-from {
+    width: 100%;
+    height: 15rem;
+}
+
+.input-to {
+    width: 100%;
+    height: 15rem;
+}
+
+.translate {
+    padding: 15px 45px;
+}
+
+.exchange {
+    color: #fff;
+    height: 4rem;
+    width: 4rem;
+    align-self: center;
+}

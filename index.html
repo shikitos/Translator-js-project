@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icons//favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style/bootstrap-reboot.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Translator</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row ">
+            <div class="col d-flex justify-content-center">
+                <select name="typeOfLang" id="type-of-lang">
+                    <option value="morse">Morse Code</option>
+                    <option value="binary">Binary Code</option>
+                    <option value="decimal">Decimal Code</option>
+                    <option value="hex">Hex Code</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-md-4">
+                <input type="text" class='input-from'>
+            </div>
+            <div class="col-md-2 switch d-flex justify-content-center">
+                <object data="img/exchange.svg" type="image/svg+xml" class='exchange'></object>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class='input-to'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <button type="submit" class="translate"></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

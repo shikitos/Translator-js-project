@@ -1,0 +1,81 @@
+header {
+    margin: 5%;
+}
+
+h1 {
+    margin-bottom: 25px;
+}
+
+span {
+    font-weight: 700;
+}
+
+p {
+    font-size: 20px;
+    margin: 0;
+}
+
+.icons img {
+    width: 50px;
+    height: 50px;
+    transition: 0.3s;
+}
+
+.icons li,
+.icons a {
+    text-decoration: none;
+    list-style: none;
+    margin: 35px 10px 60px 10px;
+}
+
+.icons img:hover {
+    transform: scale(1.2);
+}
+
+.mail a {
+    color: #000;
+    font-size: 20px;
+    text-decoration: none;
+    position: relative;
+    margin: 10px;
+}
+
+.mail a:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    content: "";
+    transition: width 0.3s ease-out;
+}
+
+.mail a:hover:after,
+.mail a:focus:after {
+    width: 100%;
+}
+
+.mail-email::before {
+    content: '';
+    background: url(../img/icons/email.png);
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+}
+
+@media screen and (max-width: 555px) {
+    .icons {
+        flex-direction: column;
+        padding: 0;
+    }
+    .icons li {
+        margin: 0;
+    }
+    .icons li:nth-child(odd) {
+        margin-right: 50%;
+    }
+    .icons li:nth-child(even) {
+        margin-left: 50%;
+    }
+}
