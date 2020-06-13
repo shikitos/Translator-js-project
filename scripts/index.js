@@ -107,17 +107,24 @@ function submitTranslate() {
     buttonTranslate.addEventListener('click', event => {
         // function takeValueByOneSymbol() {
         //take one symbol from each word
-        let arr = [];
         let text;
         let textValue = textAreaFrom.value.split();
-        for (let i = 0; i < textValue.length; i++) {
-            for (let j = 0; j < textValue[i].length; j++) {
-                arr += textValue[i][j];
+        let arr = [];
 
+        function array() {
+            for (let i = 0; i < textValue.length; i++) {
+                for (let j = 0; j < textValue[i].length; j++) {
+                    // arr = textValue[i][j];
+                    arr = Array.from(textValue[i][j]);
+                    console.log(arr);
+                }
             }
         }
+        array();
+        // console.log(arr);
+
         for (let prop in morseInternational) {
-            console.log('out');
+            // console.log('out');
             let arrayOfMorseKeys = prop;
             if (arr == prop) {
                 console.log('here');
