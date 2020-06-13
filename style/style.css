@@ -41,11 +41,19 @@ textarea {
     width: 100%;
     height: 15rem;
     resize: none;
+    border: none;
 }
 
 .translate {
     padding: 15px 45px;
     margin-top: 4rem;
+    border: none;
+    transition: 0.5s;
+    font-size: 18px;
+}
+
+.translate:hover {
+    transform: scale(1.1);
 }
 
 .exchange-img {
