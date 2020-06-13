@@ -62,6 +62,7 @@ textarea {
     width: 2rem;
     align-self: center;
     transition: 1s;
+    margin: 15px;
 }
 
 .exchange-img:hover {
