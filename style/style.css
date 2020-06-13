@@ -9,11 +9,30 @@ body {
     margin-top: 4rem;
 }
 
+.text {
+    max-width: 60%;
+}
+
+#vertical-line {
+    font-size: 22px;
+    animation: blink 1s linear infinite alternate;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .typewriter {
     color: #fff;
     text-align: center;
     font-size: 24px;
     height: 5rem;
+    display: inline-block;
 }
 
 #type-of-lang {
