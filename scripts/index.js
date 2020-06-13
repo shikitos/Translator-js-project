@@ -6,9 +6,9 @@ function typeWriter() {
     let text = [
         "Hello! ",
         "Here you can translate ",
-        "from Russian or English ",
-        "to Morse, Binary ....",
-        "codes. ;) ",
+        "from Russian or English, ",
+        "to Morse, Binary, Decimal and Hex ",
+        "code. ;) ",
     ]; //our text
     let lineCounter = 0; //line from array
     let symbolCounter = 0; //symbol from array

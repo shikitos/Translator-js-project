@@ -9,6 +9,10 @@ body {
     margin-top: 4rem;
 }
 
+.text {
+    max-width: 60%;
+}
+
 #vertical-line {
     font-size: 22px;
     animation: blink 1s linear infinite alternate;
