@@ -100,14 +100,13 @@ function encodeMorse() {
     buttonTranslate.addEventListener("click", (event) => {
         //take the word and make it lowercase
         let textValue = textAreaFrom.value.toLowerCase();
-
+        //Clear the translation
+        textAreaTo.value = '';
         for (let symbol of textValue) {
-            //Clear the translation
-            textAreaTo.value = '';
             //Translate
             textAreaTo.value += morseInternational[symbol] + ' ';
         }
-        //If text, which we wanna translate - empty — clear the area
+        //If text, which we wanna translate is empty? — clear the area
         if (textAreaFrom.value == '' || textAreaFrom.value == ' ') {
             textAreaTo.value = ' ';
         }
