@@ -64,8 +64,10 @@ textarea {
     align-self: center;
     transition: 1s;
     margin: 15px;
+    cursor: pointer;
 }
 
-.exchange-img:hover {
+
+/* .exchange-img: {
     transform: rotate(360deg);
-}
+} */

@@ -127,6 +127,26 @@ function encodeMorse() {
         э: "...-...",
         ю: "..--",
         я: ".-.-",
+        ".": ".-.-.-",
+        ",": "--..--",
+        "?": "..--..",
+        "!": "-.-.--",
+        "-": "-....-",
+        "/": "-..-.",
+        "@": ".--.-.",
+        "(": "-.--.",
+        ")": "-.--.-",
+        "0": "-----",
+        "1": ".----",
+        "2": "..---",
+        "3": "...--",
+        "4": "....-",
+        "5": ".....",
+        "6": "-....",
+        "7": "--...",
+        "8": "---..",
+        "9": "----.",
+        " ": "  ",
     };
 
     //create var-s from DOM tree
@@ -154,6 +174,17 @@ function encodeMorse() {
             textAreaTo.value = " ";
         }
     });
+
+    function exchange() {
+        let exchangeButton = document.getElementById("exchange");
+        exchangeButton.addEventListener("click", () => {
+            exchangeButton.style.transform = "rotate(360deg)";
+            textAreaFrom.placeholder =
+                "Put here your text for translate it to Morse code";
+        });
+    }
+
+    exchange();
 }
 
 encodeMorse();
@@ -205,7 +236,7 @@ decodeMorse = function() {
         "-----": "0",
     };
 
-    const morseRu = {
+    const morseRussian = {
         ".-": "А",
         "-...": "Б",
         "-.-.": "Ц",
@@ -255,4 +286,30 @@ decodeMorse = function() {
         "----.": "9",
         "-----": "0",
     };
+
+    //create var-s from DOM tree
+    let textAreaFrom = document.getElementById("text-from");
+    let buttonTranslate = document.querySelector(".translate");
+    let textAreaTo = document.getElementById("text-to");
+    //click on button and make translation
+    buttonTranslate.addEventListener("click", (event) => {
+        //take the word and make it lowercase
+        let textValue = textAreaFrom.value.toLowerCase();
+        //Clear the translation
+        textAreaTo.value = "";
+        //Iterating over the values and replacing them
+        for (let symbol of textValue) {
+            // If value is russian — translate by using morseRussian object
+            if (Object.keys(morseRussian).includes(textValue[0])) {
+                textAreaTo.value += morseRussian[symbol] + " ";
+                //else — translate by using morseInternational
+            } else {
+                textAreaTo.value += morseInternational[symbol] + " ";
+            }
+        }
+        //Text which we wanna translate empty? — clear the area
+        if (textAreaFrom.value == "" || textAreaFrom.value == " ") {
+            textAreaTo.value = " ";
+        }
+    });
 };
