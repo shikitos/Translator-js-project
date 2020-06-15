@@ -45,32 +45,32 @@ typeWriter();
 function encodeMorse() {
     //morse alphabet
     const morseInternational = {
-        "a": ".-",
-        "b": "-...",
-        "c": "-.-.",
-        "d": "-..",
-        "e": ".",
-        "f": "..-.",
-        "g": "--.",
-        "h": "....",
-        "i": "..",
-        "j": ".---",
-        "k": "-.-",
-        "l": ".-..",
-        "m": "--",
-        "n": "-.",
-        "o": "---",
-        "p": ".--.",
-        "q": "--.-",
-        "r": ".-.",
-        "s": "...",
-        "t": "-",
-        "u": "..-",
-        "v": "...-",
-        "w": ".--",
-        "x": "-..-",
-        "y": "-.--",
-        "z": "--..",
+        a: ".-",
+        b: "-...",
+        c: "-.-.",
+        d: "-..",
+        e: ".",
+        f: "..-.",
+        g: "--.",
+        h: "....",
+        i: "..",
+        j: ".---",
+        k: "-.-",
+        l: ".-..",
+        m: "--",
+        n: "-.",
+        o: "---",
+        p: ".--.",
+        q: "--.-",
+        r: ".-.",
+        s: "...",
+        t: "-",
+        u: "..-",
+        v: "...-",
+        w: ".--",
+        x: "-..-",
+        y: "-.--",
+        z: "--..",
         ".": ".-.-.-",
         ",": "--..--",
         "?": "..--..",
@@ -91,31 +91,74 @@ function encodeMorse() {
         "8": "---..",
         "9": "----.",
         " ": "  ",
-        "SOS": "...---..."
     };
-    //click on button and make translation
+
+    const morseRussian = {
+        а: ".-",
+        б: "-...",
+        в: ".--",
+        г: "--.",
+        д: "-..",
+        е: ".",
+        ё: ".",
+        ж: "...-",
+        з: "--..",
+        и: "..",
+        й: ".---",
+        к: "-.-",
+        л: ".-..",
+        м: "--",
+        н: "-.",
+        о: "---",
+        п: ".--.",
+        р: ".-.",
+        с: "...",
+        т: "-",
+        у: "..-",
+        ф: "..-.",
+        х: "....",
+        ц: "-.-.",
+        ч: "---.",
+        ш: "----",
+        щ: "--.-",
+        ъ: ".--.-.",
+        ы: "-.--",
+        ь: "-..-",
+        э: "...-...",
+        ю: "..--",
+        я: ".-.-",
+    };
+
+    //create var-s from DOM tree
     let textAreaFrom = document.getElementById("text-from");
     let buttonTranslate = document.querySelector(".translate");
-    let textAreaTo = document.getElementById('text-to');
+    let textAreaTo = document.getElementById("text-to");
+    //click on button and make translation
     buttonTranslate.addEventListener("click", (event) => {
         //take the word and make it lowercase
         let textValue = textAreaFrom.value.toLowerCase();
         //Clear the translation
-        textAreaTo.value = '';
+        textAreaTo.value = "";
+        //Iterating over the values and replacing them
         for (let symbol of textValue) {
-            //Translate
-            textAreaTo.value += morseInternational[symbol] + ' ';
+            // If value is russian — translate by using morseRussian object
+            if (Object.keys(morseRussian).includes(textValue[0])) {
+                textAreaTo.value += morseRussian[symbol] + " ";
+                //else — translate by using morseInternational
+            } else {
+                textAreaTo.value += morseInternational[symbol] + " ";
+            }
         }
-        //If text, which we wanna translate is empty? — clear the area
-        if (textAreaFrom.value == '' || textAreaFrom.value == ' ') {
-            textAreaTo.value = ' ';
+        //Text which we wanna translate empty? — clear the area
+        if (textAreaFrom.value == "" || textAreaFrom.value == " ") {
+            textAreaTo.value = " ";
         }
     });
 }
 
 encodeMorse();
 
-decodeMorse = function(morseCode, lang) {
+decodeMorse = function() {
     const morseInternational = {
         ".-": "A",
         "-...": "B",
