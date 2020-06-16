@@ -175,16 +175,16 @@ function encodeMorse() {
         }
     });
 
-    function exchange() {
-        let exchangeButton = document.getElementById("exchange");
-        exchangeButton.addEventListener("click", () => {
-            exchangeButton.style.transform = "rotate(360deg)";
-            textAreaFrom.placeholder =
-                "Put here your text for translate it to Morse code";
-        });
-    }
+    // function exchange() {
+    //     let exchangeButton = document.getElementById("exchange");
+    //     exchangeButton.addEventListener("click", () => {
+    //         exchangeButton.style.transform = "rotate(360deg)";
+    //         textAreaFrom.placeholder =
+    //             "Put here your text for translate it to Morse code";
+    //     });
+    // }
 
-    exchange();
+    // exchange();
 }
 
 encodeMorse();
@@ -313,3 +313,29 @@ decodeMorse = function() {
         }
     });
 };
+
+// decodeMorse();
+
+//function for the <option> elements
+function switchMode() {
+    let switcher = document.getElementById('type-of-lang');
+    // let switchModeMorse = document.getElementById('morse');
+    // let switchModeBinary = document.getElementById('binary');
+    // let switchModeDecimal = document.getElementById('decimal');
+    // let switchModeHex = document.getElementById('hex');
+    //when you click, and if value of the select item ...
+    switcher.addEventListener('click', () => {
+        if (switcher.value == 'morse') {
+            console.log('morse');
+        } else if (switcher.value == 'binary') {
+            console.log('binary');
+        } else if (switcher.value == 'decimal') {
+            console.log('decimal');
+        } else {
+            console.log("hex");
+        }
+    });
+
+}
+
+switchMode();
