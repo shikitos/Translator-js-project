@@ -147,6 +147,7 @@ function encodeMorse() {
         "8": "---..",
         "9": "----.",
         " ": "  ",
+        "\n": "\n",
     };
 
     //create var-s from DOM tree
@@ -159,6 +160,7 @@ function encodeMorse() {
         let textValue = textAreaFrom.value.toLowerCase();
         //Clear the translation
         textAreaTo.value = "";
+
         //Iterating over the values and replacing them
         for (let symbol of textValue) {
             // If value is russian — translate by using morseRussian object
@@ -170,7 +172,11 @@ function encodeMorse() {
             }
         }
         //Text which we wanna translate empty? — clear the area
-        if (textAreaFrom.value == "" || textAreaFrom.value == " ") {
+        if (
+            textAreaFrom.value == "" ||
+            textAreaFrom.value == null ||
+            textAreaFrom.value == " "
+        ) {
             textAreaTo.value = " ";
         }
     });
@@ -318,24 +324,27 @@ decodeMorse = function() {
 
 //function for the <option> elements
 function switchMode() {
-    let switcher = document.getElementById('type-of-lang');
+    let switcher = document.getElementById("type-of-lang");
     // let switchModeMorse = document.getElementById('morse');
     // let switchModeBinary = document.getElementById('binary');
     // let switchModeDecimal = document.getElementById('decimal');
     // let switchModeHex = document.getElementById('hex');
     //when you click, and if value of the select item ...
-    switcher.addEventListener('click', () => {
-        if (switcher.value == 'morse') {
-            console.log('morse');
-        } else if (switcher.value == 'binary') {
-            console.log('binary');
-        } else if (switcher.value == 'decimal') {
-            console.log('decimal');
+    switcher.addEventListener("click", () => {
+        if (switcher.value == "morse") {
+            console.log("morse");
+            encodeMorse();
+        } else if (switcher.value == "binary") {
+            encodeBinary();
+            console.log("binary");
+        } else if (switcher.value == "decimal") {
+            encodeDecimal();
+            console.log("decimal");
         } else {
+            encodeHex();
             console.log("hex");
         }
     });
-
 }
 
 switchMode();
