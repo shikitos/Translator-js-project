@@ -193,7 +193,7 @@ function encodeMorse() {
     // exchange();
 }
 
-encodeMorse();
+// encodeMorse();
 
 decodeMorse = function() {
     const morseInternational = {
@@ -321,6 +321,28 @@ decodeMorse = function() {
 };
 
 // decodeMorse();
+
+function encodeBinary() {
+    //create var-s
+    let textAreaFrom = document.getElementById("text-from");
+    let buttonTranslate = document.querySelector(".translate");
+    let textAreaTo = document.getElementById("text-to");
+    //create event listener - click => translate
+    buttonTranslate.addEventListener("click", () => {
+        //take the word and make it lowercase
+        let textValue = textAreaFrom.value.toLowerCase();
+        //encode character by character
+        for (let i = 0; i < textValue.length; i++) {
+            textAreaTo.value += textValue[i].charCodeAt(0).toString(2) + " ";
+        }
+        //Text which we wanna translate empty? — clear the area
+        if (textValue == "" || textValue == " ") {
+            textAreaTo.value = "";
+        }
+    });
+}
+
+encodeBinary();
 
 //function for the <option> elements
 function switchMode() {
