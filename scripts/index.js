@@ -1,35 +1,42 @@
 //Create typeWriter at the header of the page
 function typeWriter() {
     const textArea = document.getElementById("typewriter"); //get area for text
-    let verticalLine = document.querySelector("#vertical-line"); //create an element span
-    // verticalLine.setAttribute('id', 'vertical-line', '|'); //give it id=#vertical-line
-    // let insertLine = textArea.appendChild(verticalLine); //insert span at the end of the paragraph text
+    //our text
     let text = [
         "Hello! ",
         "Here you can translate ",
         "from Russian or English ",
         "to Morse, Binary, Hex ",
         "codes. ;) ",
-    ]; //our text
-    let lineCounter = 0; //line from array
-    let symbolCounter = 0; //symbol from array
+    ];
+    //line from array
+    let lineCounter = 0;
+    //symbol from array
+    let symbolCounter = 0;
     let oneSymbol = "";
 
     function typeWriteText() {
         //draw the line
         let interval = setTimeout(function() {
             oneSymbol += text[lineCounter][symbolCounter];
-            textArea.innerHTML = oneSymbol; //write symbol + "|"
-            symbolCounter++; //increase symbol counter by one point
+            //write symbol + "|"
+            textArea.innerHTML = oneSymbol;
+            //increase symbol counter by one point
+            symbolCounter++;
             if (symbolCounter >= text[lineCounter].length) {
-                symbolCounter = 0; //reset the symbol counter
-                lineCounter++; //increase line counter by one point
+                //reset the symbol counter
+                symbolCounter = 0;
+                //increase line counter by one point
+                lineCounter++;
                 if (lineCounter == text.length) {
-                    clearTimeout(interval); //stop the timeout
-                    return true; //stop the function working
+                    //stop the timeout
+                    clearTimeout(interval);
+                    //stop the function working
+                    return true;
                 }
             }
-            typeWriteText(); //start the function in the interval
+            //start the function in the interval
+            typeWriteText();
         }, randomNumber(100, 400));
 
         //Create random number for the interval (for making typeWriter more humanity)
@@ -38,7 +45,8 @@ function typeWriter() {
             return Math.floor(random);
         }
     }
-    typeWriteText(); //start the function for start all with interval
+    //start the function for start all with interval
+    typeWriteText();
 }
 typeWriter();
 
@@ -91,6 +99,7 @@ function encodeMorse() {
         "8": "---..",
         "9": "----.",
         " ": "  ",
+        "\n": "\n",
     };
 
     const morseRussian = {
@@ -180,50 +189,49 @@ function encodeMorse() {
             textAreaTo.value = " ";
         }
     });
-
-    // function exchange() {
-    //     let exchangeButton = document.getElementById("exchange");
-    //     exchangeButton.addEventListener("click", () => {
-    //         exchangeButton.style.transform = "rotate(360deg)";
-    //         textAreaFrom.placeholder =
-    //             "Put here your text for translate it to Morse code";
-    //     });
-    // }
-
-    // exchange();
 }
 
-// encodeMorse();
+encodeMorse();
+
+// function exchangeMorse() {
+//     let exchangeButton = document.getElementById("exchange");
+//     exchangeButton.addEventListener("click", () => {
+//         exchangeButton.style.transform = "rotate(360deg)";
+//         textAreaFrom.placeholder =
+//             "Put here your text for translate it to Morse code";
+//     });
+// }
+
+// exchangeMorse();
 
 decodeMorse = function() {
     const morseInternational = {
-        ".-": "A",
-        "-...": "B",
-        "-.-.": "C",
-        "-..": "D",
-        ".": "E",
-        "..-.": "F",
-        "--.": "G",
-        "....": "H",
-        "..": "I",
-        ".---": "J",
-        "-.-": "K",
-        ".-..": "L",
-        "--": "M",
-        "-.": "N",
-        "---": "O",
-        ".--.": "P",
-        "--.-": "Q",
-        ".-.": "R",
-        "...": "S",
-        "-": "T",
-        "..-": "U",
-        "...-": "V",
-        ".--": "W",
-        "-..-": "X",
-        "-.--": "Y",
-        "--..": "Z",
-        "...---...": "SOS",
+        ".-": "a",
+        "-...": "b",
+        "-.-.": "c",
+        "-..": "d",
+        ".": "e",
+        "..-.": "f",
+        "--.": "g",
+        "....": "h",
+        "..": "i",
+        ".---": "j",
+        "-.-": "k",
+        ".-..": "l",
+        "--": "m",
+        "-.": "n",
+        "---": "o",
+        ".--.": "p",
+        "--.-": "q",
+        ".-.": "r",
+        "...": "s",
+        "-": "t",
+        "..-": "u",
+        "...-": "v",
+        ".--": "w",
+        "-..-": "x",
+        "-.--": "y",
+        "--..": "z",
         "--..--": "!",
         "..--..": "?",
         "......": ".",
@@ -243,38 +251,38 @@ decodeMorse = function() {
     };
 
     const morseRussian = {
-        ".-": "А",
-        "-...": "Б",
-        "-.-.": "Ц",
-        "-..": "Д",
-        ".": "Е",
-        "..-.": "Ф",
-        "--.": "Г",
-        "....": "Х",
-        "..": "И",
-        ".---": "Й",
-        "-.-": "К",
-        ".-..": "Л",
-        "--": "М",
-        "-.": "Н",
-        "---": "О",
-        ".--.": "П",
-        "--.-": "Щ",
-        ".-.": "Р",
-        "...": "С",
-        "-": "Т",
-        "..-": "У",
-        "...-": "Ж",
-        ".--": "В",
-        "-..-": "Ь",
-        "-.--": "Ы",
-        "--..": "З",
-        "---.": "Ч",
-        "----": "Ш",
-        "--.--": "Ъ",
-        "..-..": "Э",
-        "..--": "Ю",
-        ".-.-": "Я",
+        ".-": "а",
+        "-...": "б",
+        ".--": "в",
+        "--.": "г",
+        "-..": "д",
+        ".": "е",
+        "...-": "ж",
+        "--..": "з",
+        "..": "и",
+        ".---": "й",
+        "-.-": "к",
+        ".-..": "л",
+        "--": "м",
+        "-.": "н",
+        "---": "о",
+        ".--.": "п",
+        ".-.": "р",
+        "...": "с",
+        "-": "т",
+        "..-": "у",
+        "..-.": "ф",
+        "....": "ч",
+        "-.-.": "ц",
+        "---.": "ч",
+        "----": "ш",
+        "--.-": "щ",
+        "-..-": "ь",
+        "-.--": "ы",
+        ".--.-.": "ъ",
+        "...-...": "э",
+        "..--": "ю",
+        ".-.-": "я",
         "--..--": "!",
         "..--..": "?",
         "......": ".",
@@ -320,9 +328,31 @@ decodeMorse = function() {
     });
 };
 
-// decodeMorse();
-
 function encodeBinary() {
+    //create var-s
+    let textAreaFrom = document.getElementById("text-from");
+    let buttonTranslate = document.querySelector(".translate");
+    let textAreaTo = document.getElementById("text-to");
+    //create event listener - click => translate
+    buttonTranslate.addEventListener("click", () => {
+        //take the word and make it lowercase
+        let textValue = textAreaFrom.value.toLowerCase();
+        //clean the textarea
+        textAreaTo.value = "";
+        //encode character by character
+        for (let i = 0; i < textValue.length; i++) {
+            textAreaTo.value += textValue[i].charCodeAt(0).toString(2) + " ";
+        }
+        //Text which we wanna translate empty? — clear the area
+        if (textValue == "" || textValue == " ") {
+            textAreaTo.value = " ";
+        }
+    });
+}
+
+function exchangeBinary() {}
+
+function decodeBinary() {
     //create var-s
     let textAreaFrom = document.getElementById("text-from");
     let buttonTranslate = document.querySelector(".translate");
@@ -333,7 +363,7 @@ function encodeBinary() {
         let textValue = textAreaFrom.value.toLowerCase();
         //encode character by character
         for (let i = 0; i < textValue.length; i++) {
-            textAreaTo.value += textValue[i].charCodeAt(0).toString(2) + " ";
+            textAreaTo.value += textValue[i].charCodeAt(0).toString(10) + " ";
         }
         //Text which we wanna translate empty? — clear the area
         if (textValue == "" || textValue == " ") {
@@ -342,7 +372,20 @@ function encodeBinary() {
     });
 }
 
-encodeBinary();
+// decodeBinary();
+
+function encodeDecimal() {}
+
+//maybe I should do it as a Class
+function exchangeDecimal() {}
+
+function decodeDecimal() {}
+
+function encodeHex() {}
+
+function exchangeHex() {}
+
+function decodeHex() {}
 
 //function for the <option> elements
 function switchMode() {
@@ -355,6 +398,7 @@ function switchMode() {
     switcher.addEventListener("click", () => {
         if (switcher.value == "morse") {
             console.log("morse");
+            //if switcher.value is morse => we start translate morse
             encodeMorse();
         } else if (switcher.value == "binary") {
             encodeBinary();
