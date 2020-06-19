@@ -248,6 +248,7 @@ decodeMorse = function() {
         "---..": "8",
         "----.": "9",
         "-----": "0",
+        "\n": "\n",
     };
 
     const morseRussian = {
@@ -299,6 +300,7 @@ decodeMorse = function() {
         "---..": "8",
         "----.": "9",
         "-----": "0",
+        "\n": "\n",
     };
 
     //create var-s from DOM tree
@@ -374,14 +376,56 @@ function decodeBinary() {
 
 // decodeBinary();
 
-function encodeDecimal() {}
+function encodeDecimal() {
+    //create var-s
+    let textAreaFrom = document.getElementById("text-from");
+    let buttonTranslate = document.querySelector(".translate");
+    let textAreaTo = document.getElementById("text-to");
+    //create event listener - click => translate
+    buttonTranslate.addEventListener("click", () => {
+        //take the word and make it lowercase
+        let textValue = textAreaFrom.value.toLowerCase();
+        //Clear the translation
+        textAreaTo.value = "";
+        //encode character by character
+        for (let i = 0; i < textValue.length; i++) {
+            textAreaTo.value += textValue[i].charCodeAt(0).toString(10) + " ";
+        }
+        //Text which we wanna translate empty? — clear the area
+        if (textValue == "" || textValue == " ") {
+            textAreaTo.value = "";
+        }
+    });
+}
 
 //maybe I should do it as a Class
 function exchangeDecimal() {}
 
-function decodeDecimal() {}
+function decodeDecimal() {
 
-function encodeHex() {}
+}
+
+function encodeHex() {
+    //create var-s
+    let textAreaFrom = document.getElementById("text-from");
+    let buttonTranslate = document.querySelector(".translate");
+    let textAreaTo = document.getElementById("text-to");
+    //create event listener - click => translate
+    buttonTranslate.addEventListener("click", () => {
+        //take the word and make it lowercase
+        let textValue = textAreaFrom.value.toLowerCase();
+        //Clear the translation
+        textAreaTo.value = "";
+        //encode character by character
+        for (let i = 0; i < textValue.length; i++) {
+            textAreaTo.value += textValue[i].charCodeAt(0).toString(16) + " ";
+        }
+        //Text which we wanna translate empty? — clear the area
+        if (textValue == "" || textValue == " ") {
+            textAreaTo.value = "";
+        }
+    });
+}
 
 function exchangeHex() {}
 
