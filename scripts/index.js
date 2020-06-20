@@ -82,7 +82,7 @@ function encodeMorse() {
         ".": ".-.-.-",
         ",": "--..--",
         "?": "..--..",
-        "!": "-.-.--",
+        "!": "--.--",
         "-": "-....-",
         "/": "-..-.",
         "@": ".--.-.",
@@ -139,7 +139,7 @@ function encodeMorse() {
         ".": ".-.-.-",
         ",": "--..--",
         "?": "..--..",
-        "!": "-.-.--",
+        "!": "--.--",
         "-": "-....-",
         "/": "-..-.",
         "@": ".--.-.",
@@ -163,6 +163,9 @@ function encodeMorse() {
     let textAreaFrom = document.getElementById("text-from");
     let buttonTranslate = document.querySelector(".translate");
     let textAreaTo = document.getElementById("text-to");
+    //textAreaFrom placeholder
+    textAreaFrom.placeholder =
+        "Put here your text for translate it to Morse code";
     //click on button and make translation
     buttonTranslate.addEventListener("click", (event) => {
         //take the word and make it lowercase
@@ -192,17 +195,6 @@ function encodeMorse() {
 }
 
 encodeMorse();
-
-// function exchangeMorse() {
-//     let exchangeButton = document.getElementById("exchange");
-//     exchangeButton.addEventListener("click", () => {
-//         exchangeButton.style.transform = "rotate(360deg)";
-//         textAreaFrom.placeholder =
-//             "Put here your text for translate it to Morse code";
-//     });
-// }
-
-// exchangeMorse();
 
 decodeMorse = function() {
     const morseInternational = {
@@ -249,6 +241,8 @@ decodeMorse = function() {
         "----.": "9",
         "-----": "0",
         "\n": "\n",
+        " ": " ",
+        "": "",
     };
 
     const morseRussian = {
@@ -301,6 +295,8 @@ decodeMorse = function() {
         "----.": "9",
         "-----": "0",
         "\n": "\n",
+        " ": "  ",
+        "": "",
     };
 
     //create var-s from DOM tree
@@ -310,17 +306,19 @@ decodeMorse = function() {
     //click on button and make translation
     buttonTranslate.addEventListener("click", (event) => {
         //take the word and make it lowercase
-        let textValue = textAreaFrom.value.toLowerCase();
+        let textValue = textAreaFrom.value.toLowerCase().split(" ");
+        console.log(textValue);
+
         //Clear the translation
         textAreaTo.value = "";
         //Iterating over the values and replacing them
         for (let symbol of textValue) {
             // If value is russian — translate by using morseRussian object
             if (Object.keys(morseRussian).includes(textValue[0])) {
-                textAreaTo.value += morseRussian[symbol] + " ";
+                textAreaTo.value += morseRussian[symbol];
                 //else — translate by using morseInternational
             } else {
-                textAreaTo.value += morseInternational[symbol] + " ";
+                textAreaTo.value += morseInternational[symbol];
             }
         }
         //Text which we wanna translate empty? — clear the area
@@ -330,7 +328,27 @@ decodeMorse = function() {
     });
 };
 
-function encodeBinary() {
+function exchangeValue() {
+    let exchangeButton = document.getElementById("exchange");
+    let textAreaTo = document.getElementById("text-to");
+    let textAreaFrom = document.getElementById("text-from");
+    exchangeButton.addEventListener("click", () => {
+        //rotate exchange button
+        exchangeButton.style.transform += "rotate(360deg)";
+        //edit placeholder depends on the mode
+        textAreaFrom.placeholder =
+            "Put here your text for translate it to blalba code";
+        //take translation from textAreaTo to textAreaFrom for future translate
+        textAreaFrom.value = textAreaTo.value;
+        textAreaTo.value = "";
+        decodeMorse();
+    });
+}
+
+exchangeValue();
+
+//encode all number system
+function encodeSystem(baseOfSystem) {
     //create var-s
     let textAreaFrom = document.getElementById("text-from");
     let buttonTranslate = document.querySelector(".translate");
@@ -343,7 +361,8 @@ function encodeBinary() {
         textAreaTo.value = "";
         //encode character by character
         for (let i = 0; i < textValue.length; i++) {
-            textAreaTo.value += textValue[i].charCodeAt(0).toString(2) + " ";
+            textAreaTo.value +=
+                textValue[i].charCodeAt(0).toString(baseOfSystem) + " ";
         }
         //Text which we wanna translate empty? — clear the area
         if (textValue == "" || textValue == " ") {
@@ -354,7 +373,7 @@ function encodeBinary() {
 
 function exchangeBinary() {}
 
-function decodeBinary() {
+function decodeSystem() {
     //create var-s
     let textAreaFrom = document.getElementById("text-from");
     let buttonTranslate = document.querySelector(".translate");
@@ -365,7 +384,7 @@ function decodeBinary() {
         let textValue = textAreaFrom.value.toLowerCase();
         //encode character by character
         for (let i = 0; i < textValue.length; i++) {
-            textAreaTo.value += textValue[i].charCodeAt(0).toString(10) + " ";
+            textAreaTo.value += textValue[i].toString(10);
         }
         //Text which we wanna translate empty? — clear the area
         if (textValue == "" || textValue == " ") {
@@ -374,58 +393,12 @@ function decodeBinary() {
     });
 }
 
-// decodeBinary();
-
-function encodeDecimal() {
-    //create var-s
-    let textAreaFrom = document.getElementById("text-from");
-    let buttonTranslate = document.querySelector(".translate");
-    let textAreaTo = document.getElementById("text-to");
-    //create event listener - click => translate
-    buttonTranslate.addEventListener("click", () => {
-        //take the word and make it lowercase
-        let textValue = textAreaFrom.value.toLowerCase();
-        //Clear the translation
-        textAreaTo.value = "";
-        //encode character by character
-        for (let i = 0; i < textValue.length; i++) {
-            textAreaTo.value += textValue[i].charCodeAt(0).toString(10) + " ";
-        }
-        //Text which we wanna translate empty? — clear the area
-        if (textValue == "" || textValue == " ") {
-            textAreaTo.value = "";
-        }
-    });
-}
+decodeSystem();
 
 //maybe I should do it as a Class
 function exchangeDecimal() {}
 
-function decodeDecimal() {
-
-}
-
-function encodeHex() {
-    //create var-s
-    let textAreaFrom = document.getElementById("text-from");
-    let buttonTranslate = document.querySelector(".translate");
-    let textAreaTo = document.getElementById("text-to");
-    //create event listener - click => translate
-    buttonTranslate.addEventListener("click", () => {
-        //take the word and make it lowercase
-        let textValue = textAreaFrom.value.toLowerCase();
-        //Clear the translation
-        textAreaTo.value = "";
-        //encode character by character
-        for (let i = 0; i < textValue.length; i++) {
-            textAreaTo.value += textValue[i].charCodeAt(0).toString(16) + " ";
-        }
-        //Text which we wanna translate empty? — clear the area
-        if (textValue == "" || textValue == " ") {
-            textAreaTo.value = "";
-        }
-    });
-}
+function decodeDecimal() {}
 
 function exchangeHex() {}
 
@@ -434,10 +407,6 @@ function decodeHex() {}
 //function for the <option> elements
 function switchMode() {
     let switcher = document.getElementById("type-of-lang");
-    // let switchModeMorse = document.getElementById('morse');
-    // let switchModeBinary = document.getElementById('binary');
-    // let switchModeDecimal = document.getElementById('decimal');
-    // let switchModeHex = document.getElementById('hex');
     //when you click, and if value of the select item ...
     switcher.addEventListener("click", () => {
         if (switcher.value == "morse") {
@@ -445,13 +414,16 @@ function switchMode() {
             //if switcher.value is morse => we start translate morse
             encodeMorse();
         } else if (switcher.value == "binary") {
-            encodeBinary();
+            //function to encode binary
+            encodeSystem(2);
             console.log("binary");
         } else if (switcher.value == "decimal") {
-            encodeDecimal();
+            //function to encode decimal
+            encodeSystem(10);
             console.log("decimal");
         } else {
-            encodeHex();
+            //function to encode hex
+            encodeSystem(16);
             console.log("hex");
         }
     });
