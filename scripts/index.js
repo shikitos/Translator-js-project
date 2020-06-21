@@ -321,8 +321,6 @@ function decodeMorse() {
     buttonTranslate.addEventListener("click", (event) => {
         //take the word and make it lowercase
         let textValue = textAreaFrom.value.toLowerCase().split(" ");
-        console.log(textValue);
-
         //Clear the translation
         textAreaTo.value = "";
         //Iterating over the values and replacing them
@@ -343,14 +341,16 @@ function decodeMorse() {
     });
 }
 
-function exchangeValue(translateFrom, translateTo) {
+function exchangeToEncode() {
     let switcher = document.getElementById("type-of-lang");
     let exchangeButton = document.getElementById("exchange");
     let textAreaTo = document.getElementById("text-to");
     let textAreaFrom = document.getElementById("text-from");
+    let translateFrom = "text";
+    let translateTo = "";
     exchangeButton.addEventListener("click", () => {
         //rotate exchange button
-        exchangeButton.style.transform += "rotate(360deg)";
+        exchangeButton.style.transform = "rotate(0deg)";
         //edit placeholder depends on the mode
         textAreaFrom.placeholder = `Put here your ${translateFrom} for translate it to ${translateTo}`;
         //take translation from textAreaTo to textAreaFrom for future translate
@@ -358,13 +358,64 @@ function exchangeValue(translateFrom, translateTo) {
         //clean textAreaTo
         textAreaTo.value = "";
         if (switcher.value == "morse") {
-            decodeMorse();
+            translateFrom = "text";
+            translateTo = "morse";
+            encodeMorse();
         } else if (
             switcher.value == "binary" ||
             switcher.value == "decimal" ||
             switcher.value == "hex"
         ) {
+            translateTo = switcher.value;
+            encodeSystem();
+        }
+    });
+}
+
+exchangeToEncode();
+
+function exchangeToDecode() {
+    let switcher = document.getElementById("type-of-lang");
+    let exchangeButton = document.getElementById("exchange");
+    let textAreaTo = document.getElementById("text-to");
+    let textAreaFrom = document.getElementById("text-from");
+    let translateFrom = "";
+    let translateTo = "text";
+    exchangeButton.addEventListener("click", () => {
+        //rotate exchange button
+        exchangeButton.style.transform = "rotate(360deg)";
+        //edit placeholder depends on the mode
+        textAreaFrom.placeholder = `Put here your ${translateFrom} for translate it to ${translateTo}`;
+        //take translation from textAreaTo to textAreaFrom for future translate
+        textAreaFrom.value = textAreaTo.value;
+        //clean textAreaTo
+        textAreaTo.value = "";
+        if (switcher.value == "morse") {
+            translateFrom = "morse";
+            decodeMorse();
+            removeEventListener();
+        } else if (
+            switcher.value == "binary" ||
+            switcher.value == "decimal" ||
+            switcher.value == "hex"
+        ) {
+            translateFrom = switcher.value;
             decodeSystem();
+            removeEventListener();
+        }
+    });
+}
+
+function exchangeValue() {
+    let exchangeButton = document.getElementById("exchange");
+    exchangeButton.addEventListener("click", (event) => {
+        if ((exchangeButton.style.transform = "rotate(360deg)")) {
+            exchangeToDecode();
+            console.log("From: " + exchangeButton.style.transform);
+            console.log(event);
+        } else if ((exchangeButton.style.transform = "rotate(0deg)")) {
+            exchangeToEncode();
+            console.log("To: " + exchangeButton.style.transform);
         }
     });
 }
