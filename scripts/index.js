@@ -194,6 +194,8 @@ function encodeMorse() {
         ) {
             textAreaTo.value = " ";
         }
+        textAreaTo.classList.add('morse');
+
     });
 }
 
@@ -338,6 +340,8 @@ function decodeMorse() {
         if (textAreaFrom.value == "" || textAreaFrom.value == " ") {
             textAreaTo.value = " ";
         }
+        //add class to the textareato
+        textAreaTo.classList.add('morse-to-text');
     });
 }
 
@@ -393,7 +397,6 @@ function exchangeToDecode() {
         if (switcher.value == "morse") {
             translateFrom = "morse";
             decodeMorse();
-            removeEventListener();
         } else if (
             switcher.value == "binary" ||
             switcher.value == "decimal" ||
@@ -401,7 +404,6 @@ function exchangeToDecode() {
         ) {
             translateFrom = switcher.value;
             decodeSystem();
-            removeEventListener();
         }
     });
 }
@@ -412,7 +414,6 @@ function exchangeValue() {
         if ((exchangeButton.style.transform = "rotate(360deg)")) {
             exchangeToDecode();
             console.log("From: " + exchangeButton.style.transform);
-            console.log(event);
         } else if ((exchangeButton.style.transform = "rotate(0deg)")) {
             exchangeToEncode();
             console.log("To: " + exchangeButton.style.transform);
