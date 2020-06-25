@@ -376,15 +376,30 @@ function exchangeValue() {
             counter++;
         } else if (counter % 2 !== 0 && switcher.value == 'binary') {
             exchangeButton.style.transform = 'rotate(0deg)';
-            decodeSystem('Binary');
+            decodeBinary('Binary');
             counter--;
-        } else if (switcher.value == 'hex') {
-            decodeSystem("Hex");
-            if (translateTo == 'hex') {
-                console.log(switcher.value + ' hz');
-            } else if (translateTo == 'text') {
-                console.log(switcher.value + ' ny rili hz');
-            }
+        } else if (counter % 2 == 0 && switcher.value == "decimal") {
+            //rotate switcher
+            exchangeButton.style.transform = 'rotate(360deg)';
+            //decode binary
+            encodeSystem(10, 'Decimal');
+            //increase counter by one
+            counter++;
+        } else if (counter % 2 !== 0 && switcher.value == 'decimal') {
+            exchangeButton.style.transform = 'rotate(0deg)';
+            decodeSystem('Decimal');
+            counter--;
+        } else if (counter % 2 == 0 && switcher.value == "hex") {
+            //rotate switcher
+            exchangeButton.style.transform = 'rotate(360deg)';
+            //decode binary
+            encodeSystem(16, 'Hex');
+            //increase counter by one
+            counter++;
+        } else if (counter % 2 !== 0 && switcher.value == 'hex') {
+            exchangeButton.style.transform = 'rotate(0deg)';
+            decodeSystem('Hex');
+            counter--;
         }
     });
 }
@@ -419,7 +434,7 @@ function encodeSystem(baseOfSystem, translationCode) {
     });
 }
 
-function decodeSystem(translationCode) {
+function decodeBinary(translationCode) {
     //create var-s
     let textAreaFrom = document.getElementById('text-from');
     let buttonTranslate = document.querySelector('.translate');
@@ -457,25 +472,20 @@ function decodeSystem(translationCode) {
 // function for the < option > elements
 function switchMode() {
     let switcher = document.getElementById('type-of-lang');
-    let textAreaFrom = document.getElementById('text-from');
     //when you click, and if value of the select item ...
     switcher.addEventListener('change', event => {
         if (event.target.value == 'morse') {
-            console.log('morse');
             //if switcher.value is morse => we start translate morse
             encodeMorse();
         } else if (event.target.value == 'binary') {
             //function to encode binary
-            console.log('Binary');
             encodeSystem(2, 'Binary');
         } else if (event.target.value == 'decimal') {
             //function to encode decimal
             encodeSystem(10, 'Decimal');
-            console.log('decimal');
         } else {
             //function to encode hex
             encodeSystem(16, 'Hex');
-            console.log('Hex');
         }
     });
 }
