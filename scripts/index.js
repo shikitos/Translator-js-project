@@ -349,24 +349,35 @@ function exchangeValue() {
     let exchangeButton = document.getElementById('exchange');
     let textAreaTo = document.getElementById('text-to');
     let textAreaFrom = document.getElementById('text-from');
-    let translateFrom = 'text';
-    let translateTo = '';
+    let counter = 0;
     exchangeButton.addEventListener('click', () => {
         //rotate exchange button
-        exchangeButton.style.transform = 'rotate(0deg)';
         //take translation from textAreaTo to textAreaFrom for future translate
         textAreaFrom.value = textAreaTo.value;
         //clean textAreaTo
         textAreaTo.value = '';
-        if (switcher.value == 'morse') {
-            console.log('morse');
+        if (counter % 2 == 0 && switcher.value == "morse") {
+            //rotate switcher
+            exchangeButton.style.transform = 'rotate(360deg)';
+            //decode morse
             decodeMorse();
-        } else if (switcher.value == 'binary') {
-            console.log(switcher.value);
-            decodeSystem("Binary");
-        } else if (switcher.value == 'decimal') {
-            decodeSystem("Decimal");
-            console.log(switcher.value);
+            //increase counter by one
+            counter++;
+        } else if (counter % 2 !== 0 && switcher.value == 'morse') {
+            exchangeButton.style.transform = 'rotate(0deg)';
+            encodeMorse();
+            counter--;
+        } else if (counter % 2 == 0 && switcher.value == "binary") {
+            //rotate switcher
+            exchangeButton.style.transform = 'rotate(360deg)';
+            //decode binary
+            encodeSystem(2, 'Binary');
+            //increase counter by one
+            counter++;
+        } else if (counter % 2 !== 0 && switcher.value == 'binary') {
+            exchangeButton.style.transform = 'rotate(0deg)';
+            decodeSystem('Binary');
+            counter--;
         } else if (switcher.value == 'hex') {
             decodeSystem("Hex");
             if (translateTo == 'hex') {
@@ -380,50 +391,6 @@ function exchangeValue() {
 
 exchangeValue();
 
-// function exchangeToDecode() {
-//     let switcher = document.getElementById('type-of-lang');
-//     let exchangeButton = document.getElementById('exchange');
-//     let textAreaTo = document.getElementById('text-to');
-//     let textAreaFrom = document.getElementById('text-from');
-//     let translateFrom = '';
-//     let translateTo = 'text';
-//     exchangeButton.addEventListener('click', () => {
-//         //rotate exchange button
-//         exchangeButton.style.transform = 'rotate(360deg)';
-//         //edit placeholder depends on the mode
-//         textAreaFrom.placeholder = `Put here your ${translateFrom} for translate it to ${translateTo}`;
-//         //take translation from textAreaTo to textAreaFrom for future translate
-//         textAreaFrom.value = textAreaTo.value;
-//         //clean textAreaTo
-//         textAreaTo.value = '';
-//         if (switcher.value == 'morse') {
-//             translateFrom = 'morse';
-//             decodeMorse();
-//         } else if (
-//             switcher.value == 'binary' ||
-//             switcher.value == 'decimal' ||
-//             switcher.value == 'hex'
-//         ) {
-//             translateFrom = switcher.value;
-//             decodeSystem();
-//         }
-//     });
-// }
-
-// function exchangeValue() {
-//     let exchangeButton = document.getElementById('exchange');
-//     exchangeButton.addEventListener('click', (event) => {
-//         if ((exchangeButton.style.transform = 'rotate(360deg)')) {
-//             exchangeToDecode();
-//             console.log('From: ' + exchangeButton.style.transform);
-//         } else if ((exchangeButton.style.transform = 'rotate(0deg)')) {
-//             exchangeToEncode();
-//             console.log('To: ' + exchangeButton.style.transform);
-//         }
-//     });
-// }
-
-// exchangeValue();
 
 //encode all number system
 function encodeSystem(baseOfSystem, translationCode) {
@@ -487,7 +454,7 @@ function decodeSystem(translationCode) {
 
 // decodeSystem();
 
-//function for the <option> elements
+// function for the < option > elements
 function switchMode() {
     let switcher = document.getElementById('type-of-lang');
     let textAreaFrom = document.getElementById('text-from');
