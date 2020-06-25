@@ -354,37 +354,25 @@ function exchangeValue() {
     exchangeButton.addEventListener('click', () => {
         //rotate exchange button
         exchangeButton.style.transform = 'rotate(0deg)';
-        //edit placeholder depends on the mode
-        textAreaFrom.placeholder = `Put here your ${translateFrom} for translate it to ${translateTo}`;
         //take translation from textAreaTo to textAreaFrom for future translate
         textAreaFrom.value = textAreaTo.value;
         //clean textAreaTo
         textAreaTo.value = '';
         if (switcher.value == 'morse') {
-            translateFrom = 'text';
-            translateTo = 'morse';
             console.log('morse');
-
-            encodeMorse();
+            decodeMorse();
         } else if (switcher.value == 'binary') {
-            translateTo = switcher.value;
             console.log(switcher.value);
-            encodeSystem();
+            decodeSystem("Binary");
         } else if (switcher.value == 'decimal') {
-            translateTo = switcher.value;
-            encodeSystem();
+            decodeSystem("Decimal");
             console.log(switcher.value);
         } else if (switcher.value == 'hex') {
-            translateTo = switcher.value;
-            encodeSystem();
+            decodeSystem("Hex");
             if (translateTo == 'hex') {
-                console.log(switcher.value + 'hz');
-                translateTo = 'text';
-                translateFrom = switcher.value;
-            } else {
-                translateTo = switcher.value;
-                translateFrom = 'text';
-                console.log(switcher.value + 'ny rili hz');
+                console.log(switcher.value + ' hz');
+            } else if (translateTo == 'text') {
+                console.log(switcher.value + ' ny rili hz');
             }
         }
     });
@@ -438,11 +426,14 @@ exchangeValue();
 // exchangeValue();
 
 //encode all number system
-function encodeSystem(baseOfSystem) {
+function encodeSystem(baseOfSystem, translationCode) {
     //create var-s
     let textAreaFrom = document.getElementById('text-from');
     let buttonTranslate = document.querySelector('.translate');
     let textAreaTo = document.getElementById('text-to');
+    //textAreaFrom placeholder
+    textAreaFrom.placeholder =
+        `Put here your text for translate it to ${translationCode} code`;
     //create event listener - click => translate
     buttonTranslate.addEventListener('click', () => {
         //take the word and make it lowercase
@@ -461,12 +452,15 @@ function encodeSystem(baseOfSystem) {
     });
 }
 
-function decodeSystem() {
+function decodeSystem(translationCode) {
     //create var-s
     let textAreaFrom = document.getElementById('text-from');
     let buttonTranslate = document.querySelector('.translate');
     let textAreaTo = document.getElementById('text-to');
     let text = [];
+    //textAreaFrom placeholder
+    textAreaFrom.placeholder =
+        `Put here your ${translationCode} code for translate it to text`;
     //create event listener - click => translate
     buttonTranslate.addEventListener('click', () => {
         //take the word and make it lowercase
@@ -491,29 +485,30 @@ function decodeSystem() {
     });
 }
 
-decodeSystem();
+// decodeSystem();
 
 //function for the <option> elements
 function switchMode() {
     let switcher = document.getElementById('type-of-lang');
+    let textAreaFrom = document.getElementById('text-from');
     //when you click, and if value of the select item ...
-    switcher.addEventListener('click', () => {
-        if (switcher.value == 'morse') {
+    switcher.addEventListener('change', event => {
+        if (event.target.value == 'morse') {
             console.log('morse');
             //if switcher.value is morse => we start translate morse
             encodeMorse();
-        } else if (switcher.value == 'binary') {
+        } else if (event.target.value == 'binary') {
             //function to encode binary
-            encodeSystem(2);
-            console.log('binary');
-        } else if (switcher.value == 'decimal') {
+            console.log('Binary');
+            encodeSystem(2, 'Binary');
+        } else if (event.target.value == 'decimal') {
             //function to encode decimal
-            encodeSystem(10);
+            encodeSystem(10, 'Decimal');
             console.log('decimal');
         } else {
             //function to encode hex
-            encodeSystem(16);
-            console.log('hex');
+            encodeSystem(16, 'Hex');
+            console.log('Hex');
         }
     });
 }
