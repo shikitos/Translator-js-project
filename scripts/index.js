@@ -318,6 +318,7 @@ function decodeMorse() {
     let textAreaFrom = document.getElementById('text-from');
     let buttonTranslate = document.querySelector('.translate');
     let textAreaTo = document.getElementById('text-to');
+    textAreaFrom.placeholder = `Put here your Morse code for translate it to text`;
     //click on button and make translation
     buttonTranslate.addEventListener('click', (event) => {
         //take the word and make it lowercase
@@ -356,7 +357,7 @@ function exchangeValue() {
         textAreaFrom.value = textAreaTo.value;
         //clean textAreaTo
         textAreaTo.value = '';
-        if (counter % 2 == 0 && switcher.value == "morse") {
+        if (counter % 2 == 0 && switcher.value == 'morse') {
             //rotate switcher
             exchangeButton.style.transform = 'rotate(360deg)';
             //decode morse
@@ -367,45 +368,50 @@ function exchangeValue() {
             exchangeButton.style.transform = 'rotate(0deg)';
             encodeMorse();
             counter--;
-        } else if (counter % 2 == 0 && switcher.value == "binary") {
+        } else if (counter % 2 == 0 && switcher.value == 'binary') {
             //rotate switcher
             exchangeButton.style.transform = 'rotate(360deg)';
+            console.log('first if -  encodeDecimal');
             //decode binary
-            encodeSystem(2, 'Binary');
+            decodeBinary('Binary');
             //increase counter by one
             counter++;
         } else if (counter % 2 !== 0 && switcher.value == 'binary') {
+            console.log('before decodeBinary');
             exchangeButton.style.transform = 'rotate(0deg)';
-            decodeBinary('Binary');
+            encodeSystem(2, 'Binary');
             counter--;
-        } else if (counter % 2 == 0 && switcher.value == "decimal") {
+        } else if (counter % 2 == 0 && switcher.value == 'decimal') {
             //rotate switcher
             exchangeButton.style.transform = 'rotate(360deg)';
-            //decode binary
-            encodeSystem(10, 'Decimal');
+            //decode decimal
+            decodeDecimal('Decimal');
             //increase counter by one
             counter++;
         } else if (counter % 2 !== 0 && switcher.value == 'decimal') {
             exchangeButton.style.transform = 'rotate(0deg)';
-            decodeSystem('Decimal');
+
+            encodeSystem(10, 'Decimal');
             counter--;
-        } else if (counter % 2 == 0 && switcher.value == "hex") {
+        } else if (counter % 2 == 0 && switcher.value == 'hex') {
             //rotate switcher
             exchangeButton.style.transform = 'rotate(360deg)';
-            //decode binary
-            encodeSystem(16, 'Hex');
+            //decode hex
+            decodeHex('Hex');
             //increase counter by one
             counter++;
         } else if (counter % 2 !== 0 && switcher.value == 'hex') {
             exchangeButton.style.transform = 'rotate(0deg)';
-            decodeSystem('Hex');
+            encodeSystem(16, 'Hex');
             counter--;
+        }
+        if (textAreaTo == undefined || textAreaTo == null || textAreaTo == '') {
+            alert('Sorry, error! You have to refresh the page.');
         }
     });
 }
 
 exchangeValue();
-
 
 //encode all number system
 function encodeSystem(baseOfSystem, translationCode) {
@@ -414,8 +420,7 @@ function encodeSystem(baseOfSystem, translationCode) {
     let buttonTranslate = document.querySelector('.translate');
     let textAreaTo = document.getElementById('text-to');
     //textAreaFrom placeholder
-    textAreaFrom.placeholder =
-        `Put here your text for translate it to ${translationCode} code`;
+    textAreaFrom.placeholder = `Put here your text for translate it to ${translationCode} code`;
     //create event listener - click => translate
     buttonTranslate.addEventListener('click', () => {
         //take the word and make it lowercase
@@ -441,8 +446,7 @@ function decodeBinary(translationCode) {
     let textAreaTo = document.getElementById('text-to');
     let text = [];
     //textAreaFrom placeholder
-    textAreaFrom.placeholder =
-        `Put here your ${translationCode} code for translate it to text`;
+    textAreaFrom.placeholder = `Put here your ${translationCode} code for translate it to text`;
     //create event listener - click => translate
     buttonTranslate.addEventListener('click', () => {
         //take the word and make it lowercase
@@ -467,13 +471,85 @@ function decodeBinary(translationCode) {
     });
 }
 
+function decodeDecimal(translationCode) {
+    //create var-s
+    let textAreaFrom = document.getElementById('text-from');
+    let buttonTranslate = document.querySelector('.translate');
+    let textAreaTo = document.getElementById('text-to');
+    let text = [];
+    //textAreaFrom placeholder
+    textAreaFrom.placeholder = `Put here your ${translationCode} code for translate it to text`;
+    //create event listener - click => translate
+    buttonTranslate.addEventListener('click', () => {
+        //take the word and make it lowercase
+        let textValue = textAreaFrom.value.toLowerCase().split(' ');
+        console.log(textValue);
+
+        //clean textAreaTo
+        textAreaTo.value = '';
+        //encode character by character
+        for (let i = 0; i < textValue.length; i++) {
+            //translate to text
+            text.push(String.fromCharCode(parseInt(textValue[i], 10)));
+        }
+        //change the type from array to string
+        text = text.toString();
+        console.log(text + ' after cycle');
+
+        //remove all commas from text
+        text = text.replace(/[,.]/g, '');
+        //show text in the textAreaTo
+        textAreaTo.value = text;
+        //Text which we wanna translate empty? — clear the area
+        if (textValue == '' || textValue == ' ') {
+            textAreaTo.value = '';
+        }
+    });
+}
+
+function decodeHex(translationCode) {
+    //create var-s
+    let textAreaFrom = document.getElementById('text-from');
+    let buttonTranslate = document.querySelector('.translate');
+    let textAreaTo = document.getElementById('text-to');
+    let text = [];
+    //textAreaFrom placeholder
+    textAreaFrom.placeholder = `Put here your ${translationCode} code for translate it to text`;
+    //create event listener - click => translate
+    buttonTranslate.addEventListener('click', () => {
+        //take the word and make it lowercase
+        let textValue = textAreaFrom.value.toLowerCase().split(' ');
+        console.log(textValue);
+
+        //clean textAreaTo
+        textAreaTo.value = '';
+        //encode character by character
+        for (let i = 0; i < textValue.length; i++) {
+            //translate to text
+            text.push(String.fromCharCode(parseInt(textValue[i], 16)));
+        }
+        //change the type from array to string
+        text = text.toString();
+        console.log(text + ' after cycle');
+
+        //remove all commas from text
+        text = text.replace(/[,.]/g, '');
+        //show text in the textAreaTo
+        textAreaTo.value = text;
+        //Text which we wanna translate empty? — clear the area
+        if (textValue == '' || textValue == ' ') {
+            textAreaTo.value = '';
+        }
+    });
+}
+
 // decodeSystem();
 
-// function for the < option > elements
+//function for the < option > elements
 function switchMode() {
     let switcher = document.getElementById('type-of-lang');
     //when you click, and if value of the select item ...
-    switcher.addEventListener('change', event => {
+    switcher.addEventListener('change', (event) => {
         if (event.target.value == 'morse') {
             //if switcher.value is morse => we start translate morse
             encodeMorse();
